@@ -4,8 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +15,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+//	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	Logger logger = Logger.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/")
 	public String home(Locale locale, Model model) {
 		
-		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.info("Welcome home! The client locale is {}.");
+		
+		//logs debug message
+		if (logger.isDebugEnabled()) {
+			logger.debug("getWelcome is executed!");
+		}
+		
+		//logs exception
+		logger.error("This is Error message", new Exception("Testing"));
 		
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
