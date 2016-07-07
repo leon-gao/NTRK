@@ -7,7 +7,13 @@ import java.util.Locale;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.NTRK.common.CommonConstants;
+import com.NTRK.home.dto.LinkDataResultDto;
 
 /**
  * Handles requests for the application home page.
@@ -41,5 +47,17 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "index";
+	}
+	
+	@RequestMapping(value="/saveForRedis", method=RequestMethod.POST)
+	public @ResponseBody String validate (@RequestBody LinkDataResultDto linkDataResultDto) {
+		
+		// 验证信息
+		String message = CommonConstants.ERROR;
+		
+		
+		message = CommonConstants.SUCCESS;
+		
+		return message;
 	}
 }
